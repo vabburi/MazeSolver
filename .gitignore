@@ -1,0 +1,61 @@
+
+*.orig
+*.DotSettings
+*.swp
+# Log Files and Cache
+*VisualState.xml
+
+# ignore patches
+*.patch
+
+# OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+# Visual Studio files
+*.[Oo]bj
+*.dll
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+*.unsuccessfulbuild
+*.cachefile
+ipch/
+obj/
+[Bb]in
+[Dd]ebug/
+[Rr]elease/
+
+# Ignore all packages while using package restore.
+packages/
+
+# Tooling
+_ReSharper*/
+*.resharper
+Build/[Pp]ackage/
+Build/[Rr]esults/
+Build/envvar.txt
+Build/Local/TestResult.xml
+BuildOut/*
+TestResult.xml
+StyleCop.Cache
+
+BuildOut/*
+Artifacts/
+
