@@ -5,7 +5,7 @@ If you wish to run the program without compiling the code, please go to the "\ex
 
 Here is the syntax for your reference:
 
-MazeSolver.exe <full path of maze file>
+MazeSolver.exe < full path of maze file>
 
 
 
