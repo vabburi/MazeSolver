@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using MazeSolver.Domain;
 
 namespace MazeSolver
 {
@@ -37,40 +38,44 @@ namespace MazeSolver
                     var shortestPath = pathFinder.Run(maze, start, end);
 
                     //Print Results
-                    var finalPath = new List<string>();
-
-                    for (var i = 0; i < shortestPath.Length - 1; i++)
-                    {
-                        var curr = maze.Nodes[shortestPath[i]].Location;
-                        var next = maze.Nodes[shortestPath[i + 1]].Location;
-
-                        var xDiff = curr.x - next.x;
-                        var yDiff = curr.y - next.y;
-
-                        if (xDiff == 0 && yDiff > 0)
-                        {
-                            finalPath.Add("'left'");
-                        }
-                        if (xDiff == 0 && yDiff < 0)
-                        {
-                            finalPath.Add("'right'");
-                        }
-                        if (xDiff > 0 && yDiff == 0)
-                        {
-                            finalPath.Add("'up'");
-                        }
-                        if (xDiff < 0 && yDiff == 0)
-                        {
-                            finalPath.Add("'down'");
-                        }
-                    }
-
-                    Console.WriteLine("[" + string.Join(", ", finalPath) + "]");
+                    PrintResults(maze, shortestPath);
                     Console.WriteLine();
                 }
             }
 
-            Console.ReadKey();
+        }
+
+        private static void PrintResults(Maze maze, int[] shortestPath)
+        {
+            var finalPath = new List<string>();
+
+            for (var i = 0; i < shortestPath.Length - 1; i++)
+            {
+                var curr = maze.Nodes[shortestPath[i]].Location;
+                var next = maze.Nodes[shortestPath[i + 1]].Location;
+
+                var xDiff = curr.x - next.x;
+                var yDiff = curr.y - next.y;
+
+                if (xDiff == 0 && yDiff > 0)
+                {
+                    finalPath.Add("'left'");
+                }
+                if (xDiff == 0 && yDiff < 0)
+                {
+                    finalPath.Add("'right'");
+                }
+                if (xDiff > 0 && yDiff == 0)
+                {
+                    finalPath.Add("'up'");
+                }
+                if (xDiff < 0 && yDiff == 0)
+                {
+                    finalPath.Add("'down'");
+                }
+            }
+
+            Console.WriteLine("[" + string.Join(", ", finalPath) + "]");
         }
     }
 }
