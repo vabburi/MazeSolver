@@ -8,8 +8,6 @@ namespace MazeSolver
 {
     public class PathFinder
     {
-        public const int MaxLives = 3;
-
         public int[] Run(Maze maze, int start, int end)
         {
             var cameFrom = FindPath(maze, start, end);
@@ -60,8 +58,7 @@ namespace MazeSolver
             cameFrom[start] = -1;
             costSoFar[start] = maze.Nodes[start].Cost;
 
-            int lives_remaining = MaxLives;
-
+            int lives_lost = 0;
             while (frontier.Count > 0)
             {
                 var current = frontier.Dequeue();
@@ -70,14 +67,21 @@ namespace MazeSolver
                 if (current == end)
                     break;
 
-                if (maze.Nodes[current].HasMine())
-                {
-                    maze.Nodes[current].Cost *= 10;
-                }
-
                 foreach (var next in maze.CellMatrix[current])
                 {
                     double newCost = costSoFar[current] + maze.Nodes[next].Cost;
+                    if (maze.Nodes[next].HasMine())
+                    {
+                        if (lives_lost == MazeSolver.Run.MaxLives - 1)
+                        {
+                            newCost += Math.Pow(2,10);
+                        }
+                        else
+                        {
+                            newCost += Math.Pow(2, lives_lost);
+                        }
+                    }
+
                     if (!costSoFar.ContainsKey(next)
                         || newCost < costSoFar[next])
                     {
@@ -85,6 +89,10 @@ namespace MazeSolver
                         double priority = newCost + Heuristic(maze.Nodes[next].Location, maze.Nodes[end].Location);
                         frontier.Enqueue(next, priority);
                         cameFrom[next] = current;
+                        if (maze.Nodes[next].HasMine())
+                        {
+                            lives_lost++;
+                        }
                     }
                 }
             }
@@ -109,7 +117,7 @@ namespace MazeSolver
             }
 
             cameFrom[start] = -1;
-            int lives_remaining = MaxLives;
+            int lives_remaining = MazeSolver.Run.MaxLives;
 
             while (frontier.Count > 0)
             {

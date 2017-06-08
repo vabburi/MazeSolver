@@ -7,6 +7,8 @@ namespace MazeSolver
 {
     public class Run
     {
+        public static int MaxLives = 3;
+
         public static void Main(string[] args)
         {
             if (args.Length == 0)
@@ -19,7 +21,7 @@ namespace MazeSolver
 
             foreach (var line in lines)
             {
-                if (!string.IsNullOrEmpty(line))
+                if (!String.IsNullOrEmpty(line))
                 {
                     //Extract+Build Maze
                     var build = new BuildMaze();
@@ -75,7 +77,7 @@ namespace MazeSolver
                 }
             }
 
-            Console.WriteLine("[" + string.Join(", ", finalPath) + "]");
+            Console.WriteLine("[" + String.Join(", ", finalPath) + "]");
         }
     }
 }

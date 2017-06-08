@@ -1,4 +1,6 @@
-﻿namespace MazeSolver.Domain
+﻿using System;
+
+namespace MazeSolver.Domain
 {
     public class Cell
     {
@@ -8,7 +10,7 @@
 
         public char Data;
 
-        public int Cost;
+        public double Cost;
 
         public CellLocation Location;
 
